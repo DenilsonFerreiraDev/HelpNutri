@@ -14,7 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      meals: {
+        Row: {
+          calorias: number
+          carboidratos: number | null
+          categoria: string
+          created_at: string
+          data: string
+          gorduras: number | null
+          horario: string | null
+          id: string
+          nome: string
+          proteinas: number
+          user_id: string
+        }
+        Insert: {
+          calorias?: number
+          carboidratos?: number | null
+          categoria: string
+          created_at?: string
+          data?: string
+          gorduras?: number | null
+          horario?: string | null
+          id?: string
+          nome: string
+          proteinas?: number
+          user_id?: string
+        }
+        Update: {
+          calorias?: number
+          carboidratos?: number | null
+          categoria?: string
+          created_at?: string
+          data?: string
+          gorduras?: number | null
+          horario?: string | null
+          id?: string
+          nome?: string
+          proteinas?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          altura: number | null
+          created_at: string
+          email: string | null
+          id: string
+          idade: number | null
+          nivel_atividade: string | null
+          nome: string
+          objetivo: string | null
+          peso: number | null
+          sexo: string | null
+        }
+        Insert: {
+          altura?: number | null
+          created_at?: string
+          email?: string | null
+          id: string
+          idade?: number | null
+          nivel_atividade?: string | null
+          nome?: string
+          objetivo?: string | null
+          peso?: number | null
+          sexo?: string | null
+        }
+        Update: {
+          altura?: number | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          idade?: number | null
+          nivel_atividade?: string | null
+          nome?: string
+          objetivo?: string | null
+          peso?: number | null
+          sexo?: string | null
+        }
+        Relationships: []
+      }
+      weight_history: {
+        Row: {
+          created_at: string
+          data: string
+          id: string
+          peso: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          data?: string
+          id?: string
+          peso: number
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          data?: string
+          id?: string
+          peso?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      workouts: {
+        Row: {
+          calorias_gastas: number
+          categoria: string
+          created_at: string
+          data: string
+          duracao: number
+          id: string
+          inclinacao: number | null
+          intensidade: string | null
+          tipo: string
+          user_id: string
+          velocidade: number | null
+        }
+        Insert: {
+          calorias_gastas?: number
+          categoria?: string
+          created_at?: string
+          data?: string
+          duracao: number
+          id?: string
+          inclinacao?: number | null
+          intensidade?: string | null
+          tipo: string
+          user_id?: string
+          velocidade?: number | null
+        }
+        Update: {
+          calorias_gastas?: number
+          categoria?: string
+          created_at?: string
+          data?: string
+          duracao?: number
+          id?: string
+          inclinacao?: number | null
+          intensidade?: string | null
+          tipo?: string
+          user_id?: string
+          velocidade?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
