@@ -36,7 +36,7 @@ export function useProfile() {
   });
 }
 
-export function useList<T extends "meals" | "workouts" | "weight_history">(table: T, sinceDays = 60) {
+export function useList<T extends "meals" | "workouts" | "weight_history" | "water_intake">(table: T, sinceDays = 60) {
   return useQuery({
     queryKey: [table, sinceDays],
     queryFn: async () => {
@@ -52,7 +52,7 @@ export function useList<T extends "meals" | "workouts" | "weight_history">(table
   });
 }
 
-export function useInsert<T extends "meals" | "workouts" | "weight_history">(table: T) {
+export function useInsert<T extends "meals" | "workouts" | "weight_history" | "water_intake">(table: T) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (row: TablesInsert<T>) => {
@@ -63,7 +63,7 @@ export function useInsert<T extends "meals" | "workouts" | "weight_history">(tab
   });
 }
 
-export function useDelete(table: "meals" | "workouts" | "weight_history") {
+export function useDelete(table: "meals" | "workouts" | "weight_history" | "water_intake") {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
