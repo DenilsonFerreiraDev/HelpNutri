@@ -6,7 +6,7 @@ export type Food = { id: string; nome: string; aliases: string; nutrients: Nutri
 // drinks, density approximated as 1 g/ml). Recipes, brands and portions vary.
 // Primary reference: TACO/NEPA UNICAMP, 4th edition:
 // https://nepa.unicamp.br/wp-content/uploads/sites/27/2023/10/taco_4_edicao_ampliada_e_revisada.pdf
-const food = (id: string, nome: string, aliases: string, values: number[], portions: Portion[], liquid = false): Food => ({
+const food = (id: string, nome: string, aliases: string, values: [number, number, number, number], portions: Portion[], liquid = false): Food => ({
   id, nome, aliases, nutrients: { calorias: values[0], proteinas: values[1], carboidratos: values[2], gorduras: values[3] }, portions, liquid,
 });
 export const FOODS: Food[] = [

@@ -12,7 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const Route = createFileRoute("/_authenticated/exercicios")({
-  head: () => ({ meta: [{ title: "Exercícios — HelpNutri" }, { name: "description", content: "Registre cardio e musculação." }] }),
+  head: () => ({ meta: [{ title: "Exercícios — HelpNutri" }, { name: "description", content: "Registre cardio, musculação e estimativas de gasto calórico." }, { property: "og:title", content: "Exercícios — HelpNutri" }, { property: "og:description", content: "Registre cardio, musculação e estimativas de gasto calórico." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Exercicios,
 });
 

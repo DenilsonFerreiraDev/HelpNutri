@@ -12,7 +12,7 @@ import { today, useProfile } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
-  head: () => ({ meta: [{ title: "Seu perfil — HelpNutri" }, { name: "description", content: "Configure seu perfil." }] }),
+  head: () => ({ meta: [{ title: "Seu perfil — HelpNutri" }, { name: "description", content: "Configure seu perfil e suas metas nutricionais no HelpNutri." }, { property: "og:title", content: "Seu perfil — HelpNutri" }, { property: "og:description", content: "Configure seu perfil e suas metas nutricionais no HelpNutri." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Onboarding,
 });
 

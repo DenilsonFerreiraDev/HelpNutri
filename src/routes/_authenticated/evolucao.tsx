@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/_authenticated/evolucao")({
-  head: () => ({ meta: [{ title: "Evolução — HelpNutri" }, { name: "description", content: "Gráficos de peso e consumo." }] }),
+  head: () => ({ meta: [{ title: "Evolução — HelpNutri" }, { name: "description", content: "Acompanhe seus gráficos de peso e consumo nutricional." }, { property: "og:title", content: "Evolução — HelpNutri" }, { property: "og:description", content: "Acompanhe seus gráficos de peso e consumo nutricional." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Evolucao,
 });
 

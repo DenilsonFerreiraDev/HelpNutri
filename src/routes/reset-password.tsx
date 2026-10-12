@@ -14,6 +14,8 @@ export const Route = createFileRoute("/reset-password")({
       { name: "description", content: "Defina uma nova senha para sua conta HelpNutri." },
       { property: "og:title", content: "Nova senha — HelpNutri" },
       { property: "og:description", content: "Redefina sua senha." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: ResetPage,
