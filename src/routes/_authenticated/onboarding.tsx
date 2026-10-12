@@ -46,17 +46,17 @@ function Onboarding() {
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (!f.sexo || !f.nivel_atividade || !f.objetivo) return toast.error("Preencha todas as opções");
+    if (!f.sexo || !f.nivel_atividade || !f.objetivo) { toast.error("Preencha todas as opções"); return; }
     setSaving(true);
     const { data: u } = await supabase.auth.getUser();
     const id = u.user!.id;
     const { error } = await supabase.from("profiles").upsert({
-      id, email: u.user!.email, nome: f.nome, idade: Number(f.idade), sexo: f.sexo, peso: Number(f.peso), altura: Number(f.altura),
+      id, email: u.user!.email ?? null, nome: f.nome, idade: Number(f.idade), sexo: f.sexo, peso: Number(f.peso), altura: Number(f.altura),
       nivel_atividade: f.nivel_atividade, objetivo: f.objetivo,
     });
     if (!error && !profile?.peso) await supabase.from("weight_history").insert({ peso: Number(f.peso), data: today() });
     setSaving(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await qc.invalidateQueries();
     navigate({ to: "/dashboard" });
   }
