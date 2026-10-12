@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Droplets, Plus, Trash2, Settings } from "lucide-react";
 import { toast } from "sonner";
-import { daysAgo, today, useDelete, useInsert, useList, useProfile } from "@/lib/data";
+import { today, useDelete, useInsert, useList, useProfile } from "@/lib/data";
 import { DEFAULT_HYDRATION_GOAL_ML, formatLiters, hydrationProgress, waterMl, type WaterUnit } from "@/lib/hydration";
 import { Bar, PageTitle, Panel } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,11 @@ export const Route = createFileRoute("/_authenticated/agua")({
 
 function WaterPage() {
   const profile = useProfile();
-  const records = useList("water_intake", 30);
+  const [day, setDay] = useState(today);
+  const sinceDays = Math.max(30, Math.ceil((new Date(today() + "T12:00").getTime() - new Date((day || today()) + "T12:00").getTime()) / 86400000));
+  const records = useList("water_intake", sinceDays);
   const insert = useInsert("water_intake");
   const remove = useDelete("water_intake");
-  const [day, setDay] = useState(today);
   const [quantity, setQuantity] = useState("1");
   const [unit, setUnit] = useState<WaterUnit>("glasses");
   const selected = (records.data ?? []).filter((r) => r.data === day);
