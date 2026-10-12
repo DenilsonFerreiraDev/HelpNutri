@@ -1,70 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { toast } from "sonner";
 import { Trash2, Utensils } from "lucide-react";
-import { today, useDelete, useInsert, useList } from "@/lib/data";
+import { useDelete, useList } from "@/lib/data";
 import { PageTitle, Panel } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MealForm } from "@/components/MealForm";
 
 export const Route = createFileRoute("/_authenticated/refeicoes")({
-  head: () => ({ meta: [{ title: "Refeições — HelpNutri" }, { name: "description", content: "Registre suas refeições." }] }),
+  head: () => ({ meta: [{ title: "Refeições — HelpNutri" }, { name: "description", content: "Registre alimentos e quantidades com estimativas nutricionais revisáveis." }, { property: "og:title", content: "Refeições — HelpNutri" }, { property: "og:description", content: "Registre alimentos e quantidades com estimativas nutricionais revisáveis." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Refeicoes,
 });
 
-const CATS = ["Café da manhã", "Almoço", "Jantar", "Lanche"];
-const empty = () => ({ nome: "", categoria: "Almoço", calorias: "", proteinas: "", carboidratos: "", gorduras: "", data: today(), horario: new Date().toTimeString().slice(0, 5) });
-
 function Refeicoes() {
-  const meals = useList("meals", 60).data ?? [];
-  const ins = useInsert("meals");
+  const mealsQuery = useList("meals", 60);
+  const meals = mealsQuery.data ?? [];
   const del = useDelete("meals");
-  const [f, setF] = useState(empty());
-  const set = (k: keyof ReturnType<typeof empty>) => (e: React.ChangeEvent<HTMLInputElement>) => setF({ ...f, [k]: e.target.value });
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    try {
-      await ins.mutateAsync({
-        nome: f.nome, categoria: f.categoria, calorias: Number(f.calorias), proteinas: Number(f.proteinas),
-        carboidratos: f.carboidratos ? Number(f.carboidratos) : null, gorduras: f.gorduras ? Number(f.gorduras) : null,
-        data: f.data, horario: f.horario || null,
-      });
-      toast.success("Refeição registrada");
-      setF({ ...empty(), categoria: f.categoria, data: f.data });
-    } catch (err) { toast.error((err as Error).message); }
-  }
 
   const groups = meals.reduce<Record<string, typeof meals>>((acc, m) => ((acc[m.data] ??= []).push(m), acc), {});
 
   return (
     <>
       <PageTitle title="Refeições" subtitle="Adicione o que você comeu hoje." />
-      <div className="grid gap-5 lg:grid-cols-[380px_1fr]">
+      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)]">
         <Panel title="Nova refeição">
-          <form onSubmit={submit} className="space-y-3">
-            <div className="space-y-1.5"><Label>Nome da refeição</Label><Input required value={f.nome} onChange={set("nome")} placeholder="Ex: Frango com arroz" /></div>
-            <div className="space-y-1.5"><Label>Categoria</Label>
-              <Select value={f.categoria} onValueChange={(v) => setF({ ...f, categoria: v })}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>{CATS.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5"><Label>Calorias (kcal)</Label><Input type="number" min={0} required value={f.calorias} onChange={set("calorias")} /></div>
-              <div className="space-y-1.5"><Label>Proteínas (g)</Label><Input type="number" min={0} step="0.1" required value={f.proteinas} onChange={set("proteinas")} /></div>
-              <div className="space-y-1.5"><Label>Carboidratos (g)</Label><Input type="number" min={0} step="0.1" value={f.carboidratos} onChange={set("carboidratos")} placeholder="Opcional" /></div>
-              <div className="space-y-1.5"><Label>Gorduras (g)</Label><Input type="number" min={0} step="0.1" value={f.gorduras} onChange={set("gorduras")} placeholder="Opcional" /></div>
-              <div className="space-y-1.5"><Label>Data</Label><Input type="date" required value={f.data} onChange={set("data")} /></div>
-              <div className="space-y-1.5"><Label>Horário</Label><Input type="time" value={f.horario} onChange={set("horario")} /></div>
-            </div>
-            <Button type="submit" className="w-full" disabled={ins.isPending}>Adicionar refeição</Button>
-          </form>
+          <MealForm />
         </Panel>
         <Panel title="Histórico">
-          {meals.length === 0 && <p className="py-10 text-center text-sm text-muted-foreground">Nenhuma refeição registrada ainda.</p>}
+          {mealsQuery.isLoading && <p className="py-10 text-center text-sm text-muted-foreground">Carregando refeições…</p>}
+          {mealsQuery.isError && <p role="alert" className="py-4 text-sm text-destructive">Não foi possível carregar o histórico.</p>}
+          {!mealsQuery.isLoading && !mealsQuery.isError && meals.length === 0 && <p className="py-10 text-center text-sm text-muted-foreground">Nenhuma refeição registrada ainda.</p>}
           <div className="space-y-5">
             {Object.entries(groups).map(([data, list]) => (
               <div key={data}>
@@ -81,7 +44,7 @@ function Refeicoes() {
                         <p className="text-xs text-muted-foreground">{m.categoria}{m.horario ? ` · ${m.horario.slice(0, 5)}` : ""}{m.carboidratos != null ? ` · C ${m.carboidratos}g` : ""}{m.gorduras != null ? ` · G ${m.gorduras}g` : ""}</p>
                       </div>
                       <div className="text-right text-sm"><p className="font-semibold">{Number(m.calorias)} kcal</p><p className="text-xs text-accent">{Number(m.proteinas)}g</p></div>
-                      <button aria-label="Excluir" onClick={() => del.mutate(m.id)} className="p-1 text-muted-foreground hover:text-destructive"><Trash2 className="h-4 w-4" /></button>
+                       <Button variant="ghost" size="icon" aria-label={`Excluir ${m.nome}`} title="Excluir refeição" disabled={del.isPending} onClick={() => del.mutate(m.id)} className="shrink-0 text-muted-foreground hover:text-destructive"><Trash2 className="h-4 w-4" /></Button>
                     </li>
                   ))}
                 </ul>

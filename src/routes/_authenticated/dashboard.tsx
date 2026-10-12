@@ -5,7 +5,7 @@ import { calcScore, metaCaloricaAtingida, OBJETIVOS, type Objetivo } from "@/lib
 import { Bar, PageTitle, Panel, StatCard } from "@/components/StatCard";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — HelpNutri" }, { name: "description", content: "Seu resumo diário." }] }),
+  head: () => ({ meta: [{ title: "Dashboard — HelpNutri" }, { name: "description", content: "Seu resumo diário de calorias, proteínas e exercícios." }, { property: "og:title", content: "Dashboard — HelpNutri" }, { property: "og:description", content: "Seu resumo diário de calorias, proteínas e exercícios." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Dashboard,
 });
 

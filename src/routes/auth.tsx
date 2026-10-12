@@ -15,6 +15,8 @@ export const Route = createFileRoute("/auth")({
       { name: "description", content: "Entre ou crie sua conta no HelpNutri." },
       { property: "og:title", content: "Entrar — HelpNutri" },
       { property: "og:description", content: "Acesse sua conta HelpNutri." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AuthPage,
