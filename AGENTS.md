@@ -11,3 +11,6 @@
 
 - Keep the Brazilian food catalog and portion-based estimates in a browser-safe local module; offline deterministic estimates require no AI or external services.
 - Save reviewed meal totals into the existing meals nutrition columns; dashboards and statistics retain their existing data contract.
+- Update profile settings and append changed current weight through the authenticated, invoker-rights database transaction so all existing weight-based calculations stay synchronized without losing history.
+- Store water entries as positive integer milliliters in owner-scoped rows and the editable hydration goal on profiles; use the browser-safe hydration module for unit conversion and progress, independent of nutrition scoring.
+- Keep the sidebar for desktop and use bottom navigation plus a header settings link on phones and tablets so content retains usable width.

@@ -8,6 +8,13 @@
       "when": 1791689870120,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791843922787,
+      "tag": "0001_profile_settings_and_water_tracking",
+      "breakpoints": true
     }
   ]
 }

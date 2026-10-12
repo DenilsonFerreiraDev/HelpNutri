@@ -61,6 +61,7 @@ export type Database = {
           altura: number | null
           created_at: string
           email: string | null
+          hydration_goal_ml: number
           id: string
           idade: number | null
           nivel_atividade: string | null
@@ -73,6 +74,7 @@ export type Database = {
           altura?: number | null
           created_at?: string
           email?: string | null
+          hydration_goal_ml?: number
           id: string
           idade?: number | null
           nivel_atividade?: string | null
@@ -85,6 +87,7 @@ export type Database = {
           altura?: number | null
           created_at?: string
           email?: string | null
+          hydration_goal_ml?: number
           id?: string
           idade?: number | null
           nivel_atividade?: string | null
@@ -92,6 +95,30 @@ export type Database = {
           objetivo?: string | null
           peso?: number | null
           sexo?: string | null
+        }
+        Relationships: []
+      }
+      water_intake: {
+        Row: {
+          amount_ml: number
+          created_at: string
+          data: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          amount_ml: number
+          created_at?: string
+          data?: string
+          id?: string
+          user_id?: string
+        }
+        Update: {
+          amount_ml?: number
+          created_at?: string
+          data?: string
+          id?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -166,7 +193,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_profile_settings: {
+        Args: {
+          p_activity: string
+          p_age: number
+          p_goal: string
+          p_height: number
+          p_hydration_goal: number
+          p_weight: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

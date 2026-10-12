@@ -46,7 +46,7 @@ function Evolucao() {
   return (
     <>
       <PageTitle title="Evolução" subtitle="Acompanhe seu progresso ao longo do tempo." />
-      <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
         <Panel title="Registrar peso">
           <form onSubmit={submit} className="space-y-3">
             <div className="space-y-1.5"><Label>Peso (kg)</Label><Input type="number" step="0.1" min={30} max={300} required value={peso} onChange={(e) => setPeso(e.target.value)} /></div>
@@ -58,7 +58,7 @@ function Evolucao() {
               <li key={w.id} className="flex items-center justify-between p-2.5 text-sm">
                 <span className="text-muted-foreground">{new Date(w.data + "T12:00").toLocaleDateString("pt-BR")}</span>
                 <span className="flex items-center gap-2 font-semibold">{Number(w.peso)} kg
-                  <button aria-label="Excluir" onClick={() => del.mutate(w.id)} className="text-muted-foreground hover:text-destructive"><Trash2 className="h-3.5 w-3.5" /></button>
+                  <Button size="icon" variant="ghost" aria-label="Excluir" title="Excluir peso" onClick={() => del.mutate(w.id)} className="text-muted-foreground hover:text-destructive"><Trash2 className="h-3.5 w-3.5" /></Button>
                 </span>
               </li>
             ))}
@@ -78,7 +78,7 @@ function Evolucao() {
           </div>
         </Panel>
       </div>
-      <div className="mt-5 grid gap-5 lg:grid-cols-3">
+      <div className="mt-5 grid gap-5 2xl:grid-cols-3">
         <Panel title="Calorias na semana">
           <div className="h-52"><ResponsiveContainer><BarChart data={week}><CartesianGrid stroke="var(--border)" vertical={false} /><XAxis dataKey="dia" {...axis} /><YAxis width={36} {...axis} /><Tooltip {...tip} cursor={{ fill: "var(--secondary)" }} /><Bar dataKey="kcal" name="kcal" fill="var(--primary)" radius={[6, 6, 0, 0]} /></BarChart></ResponsiveContainer></div>
         </Panel>

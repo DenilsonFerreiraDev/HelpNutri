@@ -20,10 +20,10 @@ function Choice<T extends string>({ value, onChange, options }: { value: T | "";
   return (
     <div className="grid gap-2 sm:grid-cols-2">
       {options.map(([k, label]) => (
-        <button type="button" key={k} onClick={() => onChange(k)}
-          className={cn("rounded-xl border px-4 py-3 text-left text-sm font-medium transition", value === k ? "border-primary bg-primary/10 text-foreground" : "text-muted-foreground hover:bg-secondary")}>
+        <Button variant="outline" type="button" key={k} onClick={() => onChange(k)}
+          className={cn("h-auto justify-start whitespace-normal rounded-xl border px-4 py-3 text-left text-sm font-medium transition", value === k ? "border-primary bg-primary/10 text-foreground" : "text-muted-foreground hover:bg-secondary")}>
           {label}
-        </button>
+        </Button>
       ))}
     </div>
   );
@@ -49,9 +49,10 @@ function Onboarding() {
     if (!f.sexo || !f.nivel_atividade || !f.objetivo) { toast.error("Preencha todas as opções"); return; }
     setSaving(true);
     const { data: u } = await supabase.auth.getUser();
-    const id = u.user!.id;
+    if (!u.user) { setSaving(false); toast.error("Entre novamente para salvar seu perfil."); return; }
+    const id = u.user.id;
     const { error } = await supabase.from("profiles").upsert({
-      id, email: u.user!.email ?? null, nome: f.nome, idade: Number(f.idade), sexo: f.sexo, peso: Number(f.peso), altura: Number(f.altura),
+      id, email: u.user.email ?? null, nome: f.nome, idade: Number(f.idade), sexo: f.sexo, peso: Number(f.peso), altura: Number(f.altura),
       nivel_atividade: f.nivel_atividade, objetivo: f.objetivo,
     });
     if (!error && !profile?.peso) await supabase.from("weight_history").insert({ peso: Number(f.peso), data: today() });
@@ -69,7 +70,7 @@ function Onboarding() {
         <p className="mt-2 text-muted-foreground">Usamos esses dados para calcular suas metas diárias.</p>
         <form onSubmit={save} className="mt-8 space-y-6 rounded-3xl border bg-gradient-surface p-6 shadow-card">
           <div className="space-y-2"><Label>Nome</Label><Input required value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} /></div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid gap-3 sm:grid-cols-3">
             <div className="space-y-2"><Label>Idade</Label><Input type="number" min={12} max={100} required value={f.idade} onChange={(e) => setF({ ...f, idade: e.target.value })} /></div>
             <div className="space-y-2"><Label>Peso (kg)</Label><Input type="number" step="0.1" min={30} max={300} required value={f.peso} onChange={(e) => setF({ ...f, peso: e.target.value })} /></div>
             <div className="space-y-2"><Label>Altura (cm)</Label><Input type="number" min={120} max={230} required value={f.altura} onChange={(e) => setF({ ...f, altura: e.target.value })} /></div>
