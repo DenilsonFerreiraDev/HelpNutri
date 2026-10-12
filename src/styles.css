@@ -126,8 +126,21 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
+  input, select, textarea {
+    min-width: 0;
+    max-width: 100%;
+  }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  input, select, textarea, [data-slot="select-trigger"] {
+    font-size: 16px;
+  }
+  button {
+    min-height: 44px;
   }
 }

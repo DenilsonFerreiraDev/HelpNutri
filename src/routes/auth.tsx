@@ -73,7 +73,7 @@ function AuthPage() {
   const title = mode === "login" ? "Bem-vindo de volta" : mode === "signup" ? "Crie sua conta" : "Recuperar senha";
 
   return (
-    <div className="grid min-h-screen place-items-center bg-background bg-glow px-4">
+    <div className="grid min-h-screen place-items-center bg-background bg-glow px-4 py-8">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex justify-center"><Logo /></div>
         <div className="rounded-3xl border bg-gradient-surface p-6 shadow-card">

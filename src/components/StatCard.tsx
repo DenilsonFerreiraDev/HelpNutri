@@ -7,12 +7,12 @@ export function StatCard({ icon: Icon, label, value, hint, tone = "primary", chi
 }) {
   const toneCls = { primary: "text-primary bg-primary/10", accent: "text-accent bg-accent/10", warning: "text-warning bg-warning/10", destructive: "text-destructive bg-destructive/10" }[tone];
   return (
-    <div className="rounded-2xl border bg-gradient-surface p-5 shadow-card">
+    <div className="min-w-0 rounded-2xl border bg-gradient-surface p-4 shadow-card sm:p-5">
       <div className="flex items-center gap-3">
-        <span className={cn("grid h-9 w-9 place-items-center rounded-xl", toneCls)}><Icon className="h-5 w-5" /></span>
-        <span className="text-sm text-muted-foreground">{label}</span>
+        <span className={cn("grid h-9 w-9 shrink-0 place-items-center rounded-xl", toneCls)}><Icon className="h-5 w-5" /></span>
+        <span className="min-w-0 text-sm text-muted-foreground">{label}</span>
       </div>
-      <div className="mt-4 font-display text-2xl font-bold">{value}</div>
+      <div className="mt-4 break-words font-display text-2xl font-bold">{value}</div>
       {hint && <div className="mt-1 text-xs text-muted-foreground">{hint}</div>}
       {children}
     </div>
@@ -31,7 +31,7 @@ export function Bar({ value, max, tone = "primary" }: { value: number; max: numb
 export function PageTitle({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="mb-6">
-      <h1 className="text-2xl font-bold md:text-3xl">{title}</h1>
+      <h1 className="break-words text-2xl font-bold md:text-3xl">{title}</h1>
       {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
     </div>
   );
@@ -39,7 +39,7 @@ export function PageTitle({ title, subtitle }: { title: string; subtitle?: strin
 
 export function Panel({ title, children, className }: { title?: string; children: ReactNode; className?: string }) {
   return (
-    <div className={cn("rounded-2xl border bg-gradient-surface p-5 shadow-card", className)}>
+    <div className={cn("min-w-0 rounded-2xl border bg-gradient-surface p-4 shadow-card sm:p-5", className)}>
       {title && <h2 className="mb-4 font-semibold">{title}</h2>}
       {children}
     </div>

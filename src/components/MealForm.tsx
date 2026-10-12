@@ -73,9 +73,9 @@ export function MealForm() {
       </Select>
       {results.length === 0 && <p className="text-xs text-muted-foreground">Alimento não encontrado. Você pode ajustar os valores manualmente abaixo.</p>}
       {item && <>
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_36px] items-end gap-2">
-          <div className="space-y-1.5"><Label htmlFor="food-quantity">Quantidade</Label><Input id="food-quantity" type="number" min="0.1" step="any" value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="200" /></div>
-          <div className="space-y-1.5"><Label htmlFor="food-unit">Medida</Label><Select value={unit} onValueChange={setUnit}><SelectTrigger id="food-unit"><SelectValue /></SelectTrigger><SelectContent><SelectItem value={item.liquid ? "ml" : "g"}>{item.liquid ? "ml" : "g"}</SelectItem>{item.portions.map((p) => <SelectItem key={p.label} value={p.label}>{p.label}</SelectItem>)}</SelectContent></Select></div>
+        <div className="grid grid-cols-[minmax(0,1fr)_44px] items-end gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_44px]">
+          <div className="col-span-2 space-y-1.5 sm:col-span-1"><Label htmlFor="food-quantity">Quantidade</Label><Input id="food-quantity" type="number" min="0.1" step="any" value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="200" /></div>
+          <div className="min-w-0 space-y-1.5"><Label htmlFor="food-unit">Medida</Label><Select value={unit} onValueChange={setUnit}><SelectTrigger id="food-unit" className="w-full min-w-0 [&>span]:truncate"><SelectValue /></SelectTrigger><SelectContent><SelectItem value={item.liquid ? "ml" : "g"}>{item.liquid ? "ml" : "g"}</SelectItem>{item.portions.map((p) => <SelectItem key={p.label} value={p.label}>{p.label}</SelectItem>)}</SelectContent></Select></div>
           <Button type="button" size="icon" onClick={add} aria-label="Adicionar alimento" title="Adicionar alimento"><Plus /></Button>
         </div>
         <p className="text-xs text-muted-foreground">{unit === "g" || unit === "ml" ? "Quantidade do alimento pronto para consumo." : `1 ${unit} ≈ ${item.portions.find((p) => p.label === unit)?.grams} ${item.liquid ? "ml" : "g"}`}</p>
@@ -99,7 +99,7 @@ export function MealForm() {
       <p className="text-xs leading-relaxed text-muted-foreground">Valores aproximados por porção, com referência na TACO/UNICAMP. Preparo, marcas e medidas podem variar.</p>
       <div className="flex items-center gap-2"><Switch id="manual-nutrition" checked={manual} onCheckedChange={(checked) => { setManual(checked); setAdjusted(checked ? { ...displayed } : null); }} /><Label htmlFor="manual-nutrition" className="text-sm">Ajustar valores manualmente</Label></div>
     </section>
-    <div className="grid grid-cols-2 gap-3 border-t pt-4">
+    <div className="grid gap-3 border-t pt-4 sm:grid-cols-2">
       <div className="space-y-1.5"><Label htmlFor="meal-date">Data</Label><Input id="meal-date" type="date" required value={data} onChange={(e) => setData(e.target.value)} /></div>
       <div className="space-y-1.5"><Label htmlFor="meal-time">Horário</Label><Input id="meal-time" type="time" value={horario} onChange={(e) => setHorario(e.target.value)} /></div>
     </div>

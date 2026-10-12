@@ -37,7 +37,7 @@ function Exercicios() {
   return (
     <>
       <PageTitle title="Exercícios" subtitle="Estimativa de gasto baseada no seu peso atual." />
-      <div className="grid gap-5 lg:grid-cols-[380px_1fr]">
+      <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
         <Panel>
           <Tabs defaultValue="cardio">
             <TabsList className="mb-4 grid w-full grid-cols-2"><TabsTrigger value="cardio">Cardio</TabsTrigger><TabsTrigger value="musc">Musculação</TabsTrigger></TabsList>
@@ -49,7 +49,7 @@ function Exercicios() {
                     <SelectContent>{Object.entries(CARDIO_TIPOS).map(([k, v]) => <SelectItem key={k} value={k}>{v.label}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <div className="space-y-1.5"><Label>Duração (min)</Label><Input type="number" min={1} required value={c.duracao} onChange={(e) => setC({ ...c, duracao: e.target.value })} /></div>
                   <div className="space-y-1.5"><Label>Data</Label><Input type="date" required value={c.data} onChange={(e) => setC({ ...c, data: e.target.value })} /></div>
                   <div className="space-y-1.5"><Label>Velocidade (km/h)</Label><Input type="number" step="0.1" min={0} placeholder="Opcional" value={c.velocidade} onChange={(e) => setC({ ...c, velocidade: e.target.value })} /></div>
@@ -73,7 +73,7 @@ function Exercicios() {
                     <SelectContent>{Object.entries(INTENSIDADES).map(([k, v]) => <SelectItem key={k} value={k}>{v.label}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <div className="space-y-1.5"><Label>Duração (min)</Label><Input type="number" min={1} required value={m.duracao} onChange={(e) => setM({ ...m, duracao: e.target.value })} /></div>
                   <div className="space-y-1.5"><Label>Data</Label><Input type="date" required value={m.data} onChange={(e) => setM({ ...m, data: e.target.value })} /></div>
                 </div>
@@ -90,18 +90,18 @@ function Exercicios() {
               const cardio = w.categoria === "cardio";
               const Icon = cardio ? HeartPulse : Dumbbell;
               return (
-                <li key={w.id} className="flex items-center gap-3 p-3">
-                  <span className={`grid h-9 w-9 place-items-center rounded-lg ${cardio ? "bg-accent/10 text-accent" : "bg-warning/10 text-warning"}`}><Icon className="h-4 w-4" /></span>
+                <li key={w.id} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 p-3 sm:flex sm:gap-3">
+                  <span className={`hidden h-9 w-9 shrink-0 place-items-center rounded-lg sm:grid ${cardio ? "bg-accent/10 text-accent" : "bg-warning/10 text-warning"}`}><Icon className="h-4 w-4" /></span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">{cardio ? CARDIO_TIPOS[w.tipo as CardioTipo]?.label ?? w.tipo : `Musculação · ${w.tipo}`}</p>
+                    <p className="break-words text-sm font-medium">{cardio ? CARDIO_TIPOS[w.tipo as CardioTipo]?.label ?? w.tipo : `Musculação · ${w.tipo}`}</p>
                     <p className="text-xs text-muted-foreground">
                       {new Date(w.data + "T12:00").toLocaleDateString("pt-BR")} · {w.duracao} min
                       {w.velocidade ? ` · ${w.velocidade} km/h` : ""}{w.inclinacao ? ` · ${w.inclinacao}%` : ""}
                       {w.intensidade ? ` · ${INTENSIDADES[w.intensidade as Intensidade]?.label}` : ""}
                     </p>
                   </div>
-                  <p className="text-sm font-semibold">{Number(w.calorias_gastas)} kcal</p>
-                  <button aria-label="Excluir" onClick={() => del.mutate(w.id)} className="p-1 text-muted-foreground hover:text-destructive"><Trash2 className="h-4 w-4" /></button>
+                  <p className="shrink-0 text-sm font-semibold">{Number(w.calorias_gastas)} kcal</p>
+                  <Button size="icon" variant="ghost" aria-label="Excluir" title="Excluir treino" onClick={() => del.mutate(w.id)} className="shrink-0 text-muted-foreground hover:text-destructive"><Trash2 className="h-4 w-4" /></Button>
                 </li>
               );
             })}

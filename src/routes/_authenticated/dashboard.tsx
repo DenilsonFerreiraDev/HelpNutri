@@ -3,6 +3,7 @@ import { Flame, Beef, Activity, TrendingDown, Scale, CheckCircle2, AlertTriangle
 import { metas, today, useList, useProfile } from "@/lib/data";
 import { calcScore, metaCaloricaAtingida, OBJETIVOS, type Objetivo } from "@/lib/nutrition";
 import { Bar, PageTitle, Panel, StatCard } from "@/components/StatCard";
+import { HydrationCard } from "@/components/HydrationCard";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — HelpNutri" }, { name: "description", content: "Seu resumo diário de calorias, proteínas e exercícios." }, { property: "og:title", content: "Dashboard — HelpNutri" }, { property: "og:description", content: "Seu resumo diário de calorias, proteínas e exercícios." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
@@ -61,15 +62,16 @@ function Dashboard() {
         <StatCard icon={Activity} tone="warning" label="Gasto em exercícios" value={`${Math.round(gasto)} kcal`} hint={<Link to="/exercicios" className="text-accent">Registrar treino →</Link>} />
         <StatCard icon={TrendingDown} tone={saldo <= 0 ? "primary" : "destructive"} label="Saldo calórico atual" value={`${saldo > 0 ? "+" : ""}${saldo} kcal`} hint="Consumo − (TDEE + exercícios)" />
         <StatCard icon={Scale} tone="accent" label="Peso atual" value={`${pesoAtual} kg`} hint={weights[0] ? `Registrado em ${new Date(weights[0].data + "T12:00").toLocaleDateString("pt-BR")}` : undefined} />
+        <HydrationCard />
       </div>
 
       <Panel title="Seus cálculos" className="mt-5">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
           {[["TMB", `${m.tmb} kcal`], ["TDEE", `${m.tdee} kcal`], ["Meta calórica", `${m.meta} kcal`], ["Meta de proteínas", `${m.proteina} g`]].map(([k, v]) => (
             <div key={k}><p className="text-xs text-muted-foreground">{k}</p><p className="font-display text-lg font-semibold">{v}</p></div>
           ))}
         </div>
-        <Link to="/onboarding" className="mt-4 inline-block text-xs text-accent">Atualizar perfil →</Link>
+        <Link to="/perfil" className="mt-4 inline-block py-2 text-sm text-accent">Atualizar perfil →</Link>
       </Panel>
     </>
   );

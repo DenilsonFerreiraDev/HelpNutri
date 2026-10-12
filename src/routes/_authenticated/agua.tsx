@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Droplets, Plus, Trash2, Settings } from "lucide-react";
 import { toast } from "sonner";
-import { today, useDelete, useInsert, useList, useProfile } from "@/lib/data";
+import { daysAgo, today, useDelete, useInsert, useList, useProfile } from "@/lib/data";
 import { DEFAULT_HYDRATION_GOAL_ML, formatLiters, hydrationProgress, waterMl, type WaterUnit } from "@/lib/hydration";
 import { Bar, PageTitle, Panel } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ function WaterPage() {
   return <><PageTitle title="Água e hidratação" subtitle="Seu consumo diário de água." />
     <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
       <Panel title="Registrar água"><form onSubmit={add} className="space-y-4">
-        <div className="space-y-2"><Label htmlFor="water-date">Data</Label><Input id="water-date" type="date" min={new Date(Date.now() - 30 * 86400000).toLocaleDateString("en-CA")} max={today()} required value={day} onChange={(e) => setDay(e.target.value)} /></div>
+        <div className="space-y-2"><Label htmlFor="water-date">Data</Label><Input id="water-date" type="date" required value={day} onChange={(e) => setDay(e.target.value)} /></div>
         <Tabs value={unit} onValueChange={(v) => { setUnit(v as WaterUnit); setQuantity(v === "glasses" ? "1" : "0.5"); }}><TabsList className="grid w-full grid-cols-2"><TabsTrigger value="glasses">Copos</TabsTrigger><TabsTrigger value="liters">Litros</TabsTrigger></TabsList></Tabs>
         <div className="space-y-2"><Label htmlFor="water-quantity">{unit === "glasses" ? "Quantidade de copos (250 ml)" : "Quantidade em litros"}</Label><Input id="water-quantity" type="number" required min={unit === "glasses" ? "0.25" : "0.01"} step="any" value={quantity} onChange={(e) => setQuantity(e.target.value)} /></div>
         <Button type="submit" className="w-full" disabled={insert.isPending}><Plus />{insert.isPending ? "Salvando…" : "Registrar água"}</Button>
