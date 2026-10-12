@@ -1,256 +1,215 @@
-HelpNutri 🥗💪
+<div align="center">
 
-./screenshots/home.png
+# 🥗 HelpNutri 💪
 
-Aplicativo completo para acompanhamento nutricional, exercícios, hidratação e evolução corporal.
+**Acompanhamento nutricional, exercícios, hidratação e evolução corporal em um só lugar.**
 
-Controle calorias, proteínas, treinos, água e progresso físico em uma única plataforma.
+Controle calorias, proteínas, treinos, água e progresso físico de forma simples, rápida e visual.
 
-🚀 Demonstração
+[![Demo online](https://img.shields.io/badge/🌐_Demo-Acessar_aplicação-22c55e?style=for-the-badge)](https://preview--pixel-perfect-display-0997.lovable.app/?__lovable_receipt=mat_2rmyev51gh8t4rss77fzh3dbn0)
+[![Repositório](https://img.shields.io/badge/GitHub-Repositório-181717?style=for-the-badge&logo=github)](https://github.com/DenilsonFerreiraDev/HelpNutri)
 
-🌐 Aplicação Online: Adicione o link do deploy aqui
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 
-📂 Repositório:
- https://github.com/DenilsonFerreiraDev/HelpNutri
+<br />
 
-📖 Sobre o Projeto
+<img src="./home.png.png" alt="Página inicial do HelpNutri" width="90%" />
 
-O HelpNutri é uma aplicação web desenvolvida para auxiliar pessoas que desejam emagrecer, ganhar massa muscular ou manter uma alimentação equilibrada.
+</div>
 
-O sistema calcula automaticamente metas nutricionais personalizadas, acompanha exercícios físicos, monitora hidratação diária e registra a evolução corporal do usuário através de dashboards intuitivos.
+---
 
-Ao contrário de muitos aplicativos que exigem conhecimento nutricional avançado, o HelpNutri simplifica o processo permitindo registrar alimentos e obter automaticamente estimativas de:
+## 📑 Índice
 
-Calorias
-Proteínas
-Carboidratos
-Gorduras
+- [Demonstração](#-demonstração)
+- [Sobre o projeto](#-sobre-o-projeto)
+- [Principais recursos](#-principais-recursos)
+- [Screenshots](#-screenshots)
+- [Funcionalidades em detalhe](#-funcionalidades-em-detalhe)
+- [Tecnologias](#️-tecnologias-utilizadas)
+- [Instalação local](#️-instalação-local)
+- [Estrutura do projeto](#-estrutura-do-projeto)
+- [Melhorias futuras](#-melhorias-futuras)
+- [Autor](#-autor)
+- [Licença](#-licença)
 
-Tudo centralizado em uma interface moderna e responsiva.
+---
 
-✨ Principais Recursos
+## 🚀 Demonstração
 
-✅ Cadastro e autenticação de usuários
+| | |
+|---|---|
+| 🌐 **Aplicação online** | [Acessar o HelpNutri](https://preview--pixel-perfect-display-0997.lovable.app/?__lovable_receipt=mat_2rmyev51gh8t4rss77fzh3dbn0) |
+| 📂 **Repositório** | [github.com/DenilsonFerreiraDev/HelpNutri](https://github.com/DenilsonFerreiraDev/HelpNutri) |
 
-✅ Perfil personalizado
+---
 
-✅ Metas nutricionais automáticas
+## 📖 Sobre o projeto
 
-✅ Dashboard em tempo real
+O **HelpNutri** é uma aplicação web criada para quem quer **emagrecer**, **ganhar massa muscular** ou **manter uma alimentação equilibrada**, sem precisar entender de nutrição.
 
-✅ Registro inteligente de refeições
+O sistema calcula automaticamente metas nutricionais personalizadas, acompanha exercícios, monitora a hidratação diária e registra a evolução corporal do usuário em dashboards intuitivos.
 
-✅ Estimativa automática de macronutrientes
+Em vez de exigir que você saiba os valores nutricionais de cada alimento, basta informar o que comeu e o HelpNutri estima automaticamente:
 
-✅ Controle de proteínas
+- 🔥 Calorias
+- 🥩 Proteínas
+- 🍞 Carboidratos
+- 🥑 Gorduras
 
-✅ Controle de calorias
+Tudo em uma interface moderna, escura (Dark Mode) e totalmente responsiva.
 
-✅ Registro de exercícios
+---
 
-✅ Cálculo automático de gasto calórico
+## ✨ Principais recursos
 
-✅ Controle de hidratação
+| Nutrição | Treino | Acompanhamento |
+|---|---|---|
+| ✅ Metas nutricionais automáticas | ✅ Registro de cardio e musculação | ✅ Dashboard em tempo real |
+| ✅ Registro inteligente de refeições | ✅ Cálculo automático de gasto calórico | ✅ Evolução corporal e histórico de peso |
+| ✅ Estimativa de macronutrientes | ✅ Controle de duração, velocidade e inclinação | ✅ Score diário de consistência (0 a 100) |
+| ✅ Controle de calorias e proteínas | ✅ Intensidade e grupo muscular | ✅ Controle de hidratação |
 
-✅ Evolução corporal
+**Também inclui:** cadastro e autenticação de usuários, perfil personalizado, Dark Mode e layout responsivo.
 
-✅ Score diário de consistência
+---
 
-✅ Interface Dark Mode
+## 📸 Screenshots
 
-✅ Responsividade para dispositivos móveis
-
-📊 Dashboard Inteligente
-
-O painel principal exibe informações importantes para o acompanhamento diário:
-
-Meta calórica personalizada
-Calorias consumidas
-Proteínas consumidas
-Gasto calórico em exercícios
-Saldo calórico atual
-Peso atual
-Consumo de água
-Score diário
-
-Tudo atualizado automaticamente conforme novos registros são adicionados.
-
-🍽️ Registro Inteligente de Refeições
-
-Uma das principais funcionalidades do projeto é o sistema simplificado de alimentação.
-
-Em vez de exigir que o usuário conheça os valores nutricionais dos alimentos, o sistema permite:
-
-Adicionar alimentos consumidos
-
-Exemplo:
-
-Arroz
-Feijão
-Frango
-Batata frita
-Refrigerante zero
-Estimar automaticamente
-Calorias
-Proteínas
-Carboidratos
-Gorduras
-Visualizar antes de salvar
-
-O usuário pode conferir a estimativa nutricional da refeição antes de registrá-la.
-
-🏋️ Controle de Exercícios
-
-O HelpNutri permite registrar:
-
-Cardio
-Caminhada
-Corrida
-Bicicleta
-Esteira
-
-Informando:
-
-Duração
-Velocidade
-Inclinação
-
-O sistema calcula automaticamente a estimativa de calorias queimadas.
-
-Musculação
-Grupo muscular treinado
-Intensidade
-Duração
-
-Com cálculo automático do gasto energético.
-
-💧 Controle de Hidratação
-
-O sistema acompanha:
-
-Consumo diário de água
-Meta personalizada
-Progresso visual
-
-Permitindo monitorar hábitos fundamentais para saúde e desempenho físico.
-
-📈 Evolução Corporal
-
-O usuário pode acompanhar:
-
-Peso atual
-Histórico de registros
-Evolução ao longo do tempo
-Resultados do déficit calórico
-🎯 Score Diário
-
-O aplicativo calcula automaticamente uma pontuação diária baseada na consistência do usuário.
-
-Critérios avaliados:
-
-Meta calórica atingida
-Meta de proteínas atingida
-Refeições registradas
-Exercícios registrados
-
-Pontuação:
-
-0 a 100 pontos
-
-Esse indicador ajuda a manter a disciplina e visualizar o progresso diário.
-
-👤 Perfil Personalizado
-
-Durante o cadastro, o usuário informa:
-
-Idade
-Sexo
-Peso
-Altura
-Nível de atividade física
-Objetivo
-
-Objetivos disponíveis:
-
-Perder gordura
-Manter peso
-Ganhar massa muscular
-
-As metas nutricionais são recalculadas automaticamente sempre que os dados forem alterados.
-
-🛠️ Tecnologias Utilizadas
-Front-end
-React
-TypeScript
-Vite
-Tailwind CSS
-Banco de Dados e Back-end
-Supabase
-PostgreSQL
-Gerenciamento de Estado
-TanStack Query
-Desenvolvimento
-Lovable
-📱 Responsividade
-
-O projeto foi adaptado para diferentes dispositivos:
-
-✅ Desktop
-
-✅ Notebook
-
-✅ Tablet
-
-✅ Smartphone
-
-📸 Screenshots
-Landing Page
-
-./screenshots/home.png
-
+### 🏠 Landing Page
 Página inicial apresentando os principais recursos do sistema.
 
-Dashboard
+<img src="./home.png.png" alt="Landing Page do HelpNutri" width="100%" />
 
-./screenshots/inicio.png
+<br />
 
+### 📊 Dashboard
 Painel principal com métricas nutricionais, hidratação, peso atual e score diário.
 
-Registro de Refeições
+<img src="./inicio.png.png" alt="Dashboard do HelpNutri" width="100%" />
 
-./screenshots/refeicao.png
+<br />
 
-Sistema inteligente de registro alimentar com estimativa automática de calorias e macronutrientes.
+### 🍽️ Registro de Refeições
+Registro alimentar inteligente, com estimativa automática de calorias e macronutrientes antes de salvar.
 
-Exercícios
+<img src="./refeicao.png.png" alt="Registro de refeições do HelpNutri" width="100%" />
 
-./screenshots/exercicios.png
+<br />
 
+### 🏋️ Exercícios
 Controle de cardio e musculação com cálculo automático de gasto calórico.
 
-⚙️ Instalação Local
+<img src="./exercicios.png.png" alt="Controle de exercícios do HelpNutri" width="100%" />
 
-Clone o repositório:
+---
 
-Shell
+## 🔎 Funcionalidades em detalhe
+
+### 📊 Dashboard inteligente
+
+O painel principal é atualizado automaticamente a cada novo registro e exibe:
+
+- Meta calórica personalizada
+- Calorias e proteínas consumidas
+- Gasto calórico em exercícios
+- Saldo calórico atual
+- Peso atual
+- Consumo de água
+- Score diário
+
+### 🍽️ Registro inteligente de refeições
+
+1. **Adicione** os alimentos consumidos (ex.: arroz, feijão, frango, batata frita, refrigerante zero).
+2. **Estime** automaticamente calorias, proteínas, carboidratos e gorduras.
+3. **Confira** a estimativa nutricional antes de salvar a refeição.
+
+### 🏋️ Controle de exercícios
+
+**Cardio** (caminhada, corrida, bicicleta, esteira): informe duração, velocidade e inclinação, e o sistema estima as calorias queimadas.
+
+**Musculação**: informe o grupo muscular, a intensidade e a duração para obter o gasto energético estimado.
+
+### 💧 Controle de hidratação
+
+- Consumo diário de água
+- Meta personalizada
+- Progresso visual
+
+### 📈 Evolução corporal
+
+- Peso atual
+- Histórico de registros
+- Evolução ao longo do tempo
+- Resultados do déficit calórico
+
+### 🎯 Score diário
+
+Uma pontuação de **0 a 100** calculada com base na sua consistência no dia:
+
+| Critério | Avaliação |
+|---|---|
+| Meta calórica | Atingida ou não |
+| Meta de proteínas | Atingida ou não |
+| Refeições | Registradas ou não |
+| Exercícios | Registrados ou não |
+
+### 👤 Perfil personalizado
+
+No cadastro, o usuário informa **idade, sexo, peso, altura, nível de atividade física e objetivo** (perder gordura, manter peso ou ganhar massa muscular). As metas são recalculadas automaticamente sempre que esses dados mudam.
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+| Categoria | Tecnologias |
+|---|---|
+| **Front-end** | React, TypeScript, Vite, Tailwind CSS |
+| **Back-end e banco de dados** | Supabase, PostgreSQL |
+| **Gerenciamento de estado** | TanStack Query |
+| **Desenvolvimento** | Lovable |
+
+---
+
+## 📱 Responsividade
+
+Funciona bem em **desktop**, **notebook**, **tablet** e **smartphone**.
+
+---
+
+## ⚙️ Instalação local
+
+**Pré-requisitos:** [Node.js](https://nodejs.org/) (ou [Bun](https://bun.sh/)) e Git.
+
+```bash
+# 1. Clone o repositório
 git clone https://github.com/DenilsonFerreiraDev/HelpNutri.git
 
-Entre na pasta:
-
-Shell
+# 2. Entre na pasta
 cd HelpNutri
 
-Instale as dependências:
-
-Shell
+# 3. Instale as dependências
 npm install
+# ou, se preferir Bun:
+# bun install
 
-Execute o projeto:
-
-Shell
+# 4. Execute o projeto
 npm run dev
-📁 Estrutura do Projeto
-Plain Text
+# ou:
+# bun run dev
+```
+
+Depois, abra o endereço exibido no terminal (normalmente `http://localhost:5173`).
+
+---
+
+## 📁 Estrutura do projeto
+
+```text
 src/
 ├── components
 ├── pages
@@ -259,45 +218,49 @@ src/
 ├── integrations
 ├── types
 └── utils
-🌟 Diferenciais do Projeto
+```
 
-✅ Interface moderna e intuitiva
+---
 
-✅ Metas nutricionais automáticas
+## 🌟 Diferenciais
 
-✅ Estimativas de macronutrientes
+- Interface moderna e intuitiva
+- Metas nutricionais automáticas
+- Estimativas de macronutrientes sem esforço
+- Acompanhamento completo de exercícios e hidratação
+- Dashboard em tempo real
+- Sistema gamificado por score diário
+- Experiência otimizada para dispositivos móveis
+- Armazenamento persistente via Supabase
 
-✅ Acompanhamento de exercícios
+---
 
-✅ Controle completo de hidratação
+## 🔮 Melhorias futuras
 
-✅ Dashboard em tempo real
+- [ ] Favoritar refeições frequentes
+- [ ] Registro de medidas corporais
+- [ ] Relatórios mensais
+- [ ] Exportação de dados
+- [ ] Notificações de hidratação
+- [ ] Planejamento semanal de refeições
+- [ ] Integração com smartwatches
 
-✅ Evolução corporal
+---
 
-✅ Sistema gamificado por score
+## 👨‍💻 Autor
 
-✅ Experiência otimizada para dispositivos móveis
+**Antonio Denilson Ferreira Araújo**
 
-✅ Armazenamento persistente via Supabase
+[![GitHub](https://img.shields.io/badge/GitHub-DenilsonFerreiraDev-181717?style=flat-square&logo=github)](https://github.com/DenilsonFerreiraDev)
 
-🔮 Melhorias Futuras
-Favoritar refeições frequentes
-Registro de medidas corporais
-Relatórios mensais
-Exportação de dados
-Notificações de hidratação
-Planejamento semanal de refeições
-Integração com smartwatches
-👨‍💻 Autor
+---
 
-Antonio Denilson Ferreira Araújo
-
-GitHub: https://github.com/DenilsonFerreiraDev
-📄 Licença
+## 📄 Licença
 
 Este projeto foi desenvolvido para fins de estudo, prática de desenvolvimento web e composição de portfólio profissional.
 
-⭐ Se este projeto foi interessante para você, considere deixar uma estrela no repositório.
+<div align="center">
 
-Forneça seus comentários sobre o BizChat
+⭐ Se este projeto foi interessante para você, considere deixar uma estrela no repositório!
+
+</div>
