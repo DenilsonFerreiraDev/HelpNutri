@@ -13,7 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEvolucaoRouteImport } from './routes/_authenticated/evolucao'
+import { Route as AuthenticatedExerciciosRouteImport } from './routes/_authenticated/exercicios'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedRefeicoesRouteImport } from './routes/_authenticated/refeicoes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,9 +38,29 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEvolucaoRoute = AuthenticatedEvolucaoRouteImport.update({
+  id: '/evolucao',
+  path: '/evolucao',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExerciciosRoute = AuthenticatedExerciciosRouteImport.update({
+  id: '/exercicios',
+  path: '/exercicios',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRefeicoesRoute = AuthenticatedRefeicoesRouteImport.update({
+  id: '/refeicoes',
+  path: '/refeicoes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -44,13 +68,21 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/evolucao': typeof AuthenticatedEvolucaoRoute
+  '/exercicios': typeof AuthenticatedExerciciosRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/refeicoes': typeof AuthenticatedRefeicoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/evolucao': typeof AuthenticatedEvolucaoRoute
+  '/exercicios': typeof AuthenticatedExerciciosRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/refeicoes': typeof AuthenticatedRefeicoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -58,20 +90,44 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/evolucao': typeof AuthenticatedEvolucaoRoute
+  '/_authenticated/exercicios': typeof AuthenticatedExerciciosRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/refeicoes': typeof AuthenticatedRefeicoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/reset-password' | '/onboarding'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/dashboard'
+    | '/evolucao'
+    | '/exercicios'
+    | '/onboarding'
+    | '/refeicoes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/reset-password' | '/onboarding'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/dashboard'
+    | '/evolucao'
+    | '/exercicios'
+    | '/onboarding'
+    | '/refeicoes'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/evolucao'
+    | '/_authenticated/exercicios'
     | '/_authenticated/onboarding'
+    | '/_authenticated/refeicoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -111,6 +167,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/evolucao': {
+      id: '/_authenticated/evolucao'
+      path: '/evolucao'
+      fullPath: '/evolucao'
+      preLoaderRoute: typeof AuthenticatedEvolucaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exercicios': {
+      id: '/_authenticated/exercicios'
+      path: '/exercicios'
+      fullPath: '/exercicios'
+      preLoaderRoute: typeof AuthenticatedExerciciosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/onboarding': {
       id: '/_authenticated/onboarding'
       path: '/onboarding'
@@ -118,15 +195,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/refeicoes': {
+      id: '/_authenticated/refeicoes'
+      path: '/refeicoes'
+      fullPath: '/refeicoes'
+      preLoaderRoute: typeof AuthenticatedRefeicoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEvolucaoRoute: typeof AuthenticatedEvolucaoRoute
+  AuthenticatedExerciciosRoute: typeof AuthenticatedExerciciosRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedRefeicoesRoute: typeof AuthenticatedRefeicoesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEvolucaoRoute: AuthenticatedEvolucaoRoute,
+  AuthenticatedExerciciosRoute: AuthenticatedExerciciosRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedRefeicoesRoute: AuthenticatedRefeicoesRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
