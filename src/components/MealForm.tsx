@@ -31,7 +31,12 @@ export function MealForm() {
   const [adjusted, setAdjusted] = useState<Record<keyof Nutrients, string> | null>(null);
   const item = FOODS.find((f) => f.id === foodId);
   const estimates = estimateMeal(rows);
-  const results = searchFoods(query);
+  const results = searchFoods(query).slice(0, 8);
+  const profileQuery = useProfile();
+  const profile = profileQuery.data;
+  const analysis = rows.length && profileComplete(profile)
+    ? analyzeMeal(estimates, metas(profile!).proteina, profile!.objetivo as Objetivo)
+    : null;
   const displayed = adjusted ?? Object.fromEntries(NUTRIENTS.map(([key]) => [key, String(estimates[key])])) as Record<keyof Nutrients, string>;
 
   function resetAdjustment() { setManual(false); setAdjusted(null); }
