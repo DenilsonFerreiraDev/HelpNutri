@@ -111,6 +111,7 @@ export function MealForm() {
           {manual ? <Input id={`nutrition-${key}`} type="number" required min={0} step="0.1" value={displayed[key]} onChange={(e) => setAdjusted({ ...displayed, [key]: e.target.value })} /> : <p id={`nutrition-${key}`} className="text-xl font-semibold tabular-nums">{estimates[key]} <span className="text-xs font-normal text-muted-foreground">{suffix}</span></p>}
         </div>)}
       </div>
+      {analysis && <p className="rounded-lg bg-primary/10 px-3 py-2 text-sm text-primary" role="status">{analysis}</p>}
       <p className="text-xs leading-relaxed text-muted-foreground">Valores aproximados por porção, com referência na TACO/UNICAMP. Preparo, marcas e medidas podem variar.</p>
       <div className="flex items-center gap-2"><Switch id="manual-nutrition" checked={manual} onCheckedChange={(checked) => { setManual(checked); setAdjusted(checked ? { ...displayed } : null); }} /><Label htmlFor="manual-nutrition" className="text-sm">Ajustar valores manualmente</Label></div>
     </section>
