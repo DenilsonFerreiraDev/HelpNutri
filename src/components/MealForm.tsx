@@ -74,10 +74,18 @@ export function MealForm() {
     <fieldset className="min-w-0 space-y-3 border-t pt-4">
       <legend className="pr-2 text-sm font-semibold">Alimentos consumidos</legend>
       <div className="relative"><Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /><Input aria-label="Buscar alimento" className="pl-9" placeholder="Buscar arroz, frango, banana…" value={query} onChange={(e) => { setQuery(e.target.value); setFoodId(""); }} /></div>
-      <Select value={foodId} onValueChange={pick}>
-        <SelectTrigger aria-label="Alimento" className="w-full min-w-0 [&>span]:truncate"><SelectValue placeholder="Selecione um alimento" /></SelectTrigger>
-        <SelectContent>{results.map((f) => <SelectItem key={f.id} value={f.id}>{f.nome}</SelectItem>)}</SelectContent>
-      </Select>
+      {query && !foodId && results.length > 0 && (
+        <ul className="divide-y rounded-xl border" role="listbox" aria-label="Sugestões de alimentos">
+          {results.map((f) => (
+            <li key={f.id}>
+              <button type="button" role="option" aria-selected={false} className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-sm hover:bg-muted/50" onClick={() => { pick(f.id); setQuery(""); }}>
+                <span className="min-w-0 flex-1 break-words">{f.nome}</span>
+                <span className="shrink-0 text-xs text-muted-foreground">{f.nutrients.calorias} kcal/100{f.liquid ? "ml" : "g"}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
       {results.length === 0 && <p className="text-xs text-muted-foreground">Alimento não encontrado. Você pode ajustar os valores manualmente abaixo.</p>}
       {item && <>
         <div className="grid grid-cols-[minmax(0,1fr)_44px] items-end gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_44px]">
