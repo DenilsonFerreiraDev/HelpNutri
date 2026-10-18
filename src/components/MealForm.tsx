@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Plus, RotateCcw, Trash2, Search } from "lucide-react";
 import { toast } from "sonner";
-import { today, useInsert } from "@/lib/data";
+import { today, useInsert, useProfile, metas, profileComplete } from "@/lib/data";
 import { FOODS, estimateMeal, searchFoods, type FoodEntry, type Nutrients } from "@/lib/foods";
+import { analyzeMeal } from "@/lib/mealAnalysis";
+import type { Objetivo } from "@/lib/nutrition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,7 +31,12 @@ export function MealForm() {
   const [adjusted, setAdjusted] = useState<Record<keyof Nutrients, string> | null>(null);
   const item = FOODS.find((f) => f.id === foodId);
   const estimates = estimateMeal(rows);
-  const results = searchFoods(query);
+  const results = searchFoods(query).slice(0, 8);
+  const profileQuery = useProfile();
+  const profile = profileQuery.data;
+  const analysis = rows.length && profileComplete(profile)
+    ? analyzeMeal(estimates, metas(profile!).proteina, profile!.objetivo as Objetivo)
+    : null;
   const displayed = adjusted ?? Object.fromEntries(NUTRIENTS.map(([key]) => [key, String(estimates[key])])) as Record<keyof Nutrients, string>;
 
   function resetAdjustment() { setManual(false); setAdjusted(null); }
@@ -67,10 +74,18 @@ export function MealForm() {
     <fieldset className="min-w-0 space-y-3 border-t pt-4">
       <legend className="pr-2 text-sm font-semibold">Alimentos consumidos</legend>
       <div className="relative"><Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /><Input aria-label="Buscar alimento" className="pl-9" placeholder="Buscar arroz, frango, banana…" value={query} onChange={(e) => { setQuery(e.target.value); setFoodId(""); }} /></div>
-      <Select value={foodId} onValueChange={pick}>
-        <SelectTrigger aria-label="Alimento" className="w-full min-w-0 [&>span]:truncate"><SelectValue placeholder="Selecione um alimento" /></SelectTrigger>
-        <SelectContent>{results.map((f) => <SelectItem key={f.id} value={f.id}>{f.nome}</SelectItem>)}</SelectContent>
-      </Select>
+      {query && !foodId && results.length > 0 && (
+        <ul className="divide-y rounded-xl border" role="listbox" aria-label="Sugestões de alimentos">
+          {results.map((f) => (
+            <li key={f.id}>
+              <button type="button" role="option" aria-selected={false} className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-sm hover:bg-muted/50" onClick={() => { pick(f.id); setQuery(""); }}>
+                <span className="min-w-0 flex-1 break-words">{f.nome}</span>
+                <span className="shrink-0 text-xs text-muted-foreground">{f.nutrients.calorias} kcal/100{f.liquid ? "ml" : "g"}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
       {results.length === 0 && <p className="text-xs text-muted-foreground">Alimento não encontrado. Você pode ajustar os valores manualmente abaixo.</p>}
       {item && <>
         <div className="grid grid-cols-[minmax(0,1fr)_44px] items-end gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_44px]">
@@ -96,6 +111,7 @@ export function MealForm() {
           {manual ? <Input id={`nutrition-${key}`} type="number" required min={0} step="0.1" value={displayed[key]} onChange={(e) => setAdjusted({ ...displayed, [key]: e.target.value })} /> : <p id={`nutrition-${key}`} className="text-xl font-semibold tabular-nums">{estimates[key]} <span className="text-xs font-normal text-muted-foreground">{suffix}</span></p>}
         </div>)}
       </div>
+      {analysis && <p className="rounded-lg bg-primary/10 px-3 py-2 text-sm text-primary" role="status">{analysis}</p>}
       <p className="text-xs leading-relaxed text-muted-foreground">Valores aproximados por porção, com referência na TACO/UNICAMP. Preparo, marcas e medidas podem variar.</p>
       <div className="flex items-center gap-2"><Switch id="manual-nutrition" checked={manual} onCheckedChange={(checked) => { setManual(checked); setAdjusted(checked ? { ...displayed } : null); }} /><Label htmlFor="manual-nutrition" className="text-sm">Ajustar valores manualmente</Label></div>
     </section>
