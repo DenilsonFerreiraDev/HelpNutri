@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Plus, RotateCcw, Trash2, Search } from "lucide-react";
 import { toast } from "sonner";
-import { today, useInsert } from "@/lib/data";
+import { today, useInsert, useProfile, metas, profileComplete } from "@/lib/data";
 import { FOODS, estimateMeal, searchFoods, type FoodEntry, type Nutrients } from "@/lib/foods";
+import { analyzeMeal } from "@/lib/mealAnalysis";
+import type { Objetivo } from "@/lib/nutrition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
